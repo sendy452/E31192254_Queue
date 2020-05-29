@@ -11,14 +11,16 @@ package E31192254;
  */
 public class Queue {
 
-    int data[];
+    String data[];
     int head = 0;
     int tail = -1;
 
+    //Meminta nilai dari jumlah array Queue
     public Queue(int size) {
-        data = new int[size];
+        data = new String[size];
     }
 
+    //Method untuk mengecek apakah isi array Queue masih kosong atau belum penuh
     public boolean isEmpty() {
         if (tail == -1) {
             return true;
@@ -27,6 +29,7 @@ public class Queue {
         }
     }
 
+    //Method untuk mengembalikan nilai boolean apabila isi array Queue sudah penuh
     public boolean isFull() {
         if (tail == data.length - 1) {
             return true;
@@ -35,37 +38,47 @@ public class Queue {
         }
     }
 
-    public void Enqueue(int dataBaru) {
+    /*
+    Method yang berfungsi untuk menambahkan data ke dalam array Queue
+    Ada dua kondisi apabila data belum penuh maka akan menambahkan data tersubut kedalam array,
+    apabila array penuh maka akan menampilkan "Isi Queue sudah penuh".
+     */
+    public void Enqueue(String dataBaru) {
         if (isEmpty()) {
             tail = head;
             data[tail] = dataBaru;
         } else if (!isFull()) {
             tail++;
             data[tail] = dataBaru;
-        } else if (isFull()) {
-            System.out.println("antrian sudah penuh");
+        } else {
+            System.out.println("Isi Queue sudah penuh");
         }
     }
 
+    //Method yang berfungsi untuk menghapus data terlama atau data paling awal ditambahkan di dalam array Queue
     public int Dequeue() {
-        int temp = data[head];
-        for (int i = head; i  <= tail - 1; i++){
-            data[i] = data[i + 1];
+        int temp = 0;
+        if (!isEmpty()) {
+            System.out.println("Sukses menghapus data " + data[head]);
+            for (int i = head; i <= tail - 1; i++) {
+                data[i] = data[i + 1];
+            }
+            tail--;
         }
-        tail--;
         return temp;
     }
 
+    //Method untuk menmapilkan isi dari array Queue
     public void tampilkan() {
         if (!isEmpty()) {
             int index = head;
-            while (index <= tail){
+            while (index <= tail) {
                 System.out.print("|" + data[index] + "| ");
                 index++;
             }
-            System.out.println();
+            System.out.println("\n");
         } else {
-            System.out.println("Kosong");
+            System.out.println("Isi Queue kosong \n");
         }
     }
 }
